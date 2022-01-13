@@ -316,6 +316,25 @@ define Device/dlink_dir-1960-a1
 endef
 TARGET_DEVICES += dlink_dir-1960-a1
 
+define Device/dlink_dir-2150-r1
+  $(Device/dsa-migration)
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_SIZE := 4096k
+  IMAGE_SIZE := 15104k
+  UBINIZE_OPTS := -E 5
+  DEVICE_MODEL := DIR-2150
+  DEVICE_VARIANT := R1
+  DEVICE_VENDOR := D-Link
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7615-firmware kmod-usb3 
+  KERNEL_INITRAMFS := $$(KERNEL)
+  IMAGES += factory.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
+	check-size
+endef
+TARGET_DEVICES += dlink_dir-2150-r1
+
 define Device/dlink_dir-2640-a1
   $(Device/dlink_dir-xx60-a1)
   DEVICE_MODEL := DIR-2640
