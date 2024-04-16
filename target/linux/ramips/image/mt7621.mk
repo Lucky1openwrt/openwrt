@@ -777,6 +777,14 @@ define Device/dlink_dir-1960-a1
 endef
 TARGET_DEVICES += dlink_dir-1960-a1
 
+define Device/dlink_dir-2055-a1
+  $(Device/dlink_dir-xx60-a1)
+  DEVICE_PACKAGES += kmod-mt7615-firmware kmod-usb3
+  DEVICE_MODEL := DIR-2055
+  DEVICE_VARIANT := A1
+endef
+TARGET_DEVICES += dlink_dir-2055-a1
+
 define Device/dlink_dir-2640-a1
   $(Device/dlink_dir-xx60-a1)
   DEVICE_PACKAGES += kmod-mt7615-firmware kmod-usb3 kmod-usb-ledtrig-usbport
