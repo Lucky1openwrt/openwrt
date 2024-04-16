@@ -754,6 +754,15 @@ define Device/dlink_dir_nand_128m
 	check-size
 endef
 
+define Device/dlink_dir-1260-a1
+  $(Device/dlink_dir_nand_128m)
+  DEVICE_PACKAGES += kmod-mt7603 kmod-mt7663-firmware-ap \
+  	-kmod-mt7615-firmware -kmod-usb3 -kmod-usb-ledtrig-usbport
+  DEVICE_MODEL := DIR-1260
+  DEVICE_VARIANT := A1
+endef
+TARGET_DEVICES += dlink_dir-1260-a1
+
 define Device/dlink_dir-1935-a1
   $(Device/dlink_dir-8xx-a1)
   DEVICE_MODEL := DIR-1935
