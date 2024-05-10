@@ -15,7 +15,7 @@
 		led-upgrade = &led_net_orange;
 	};
 
-	keys {
+	keys: keys {
 		compatible = "gpio-keys";
 
 		reset {
