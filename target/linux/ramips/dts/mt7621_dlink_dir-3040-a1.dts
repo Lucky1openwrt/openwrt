@@ -55,13 +55,15 @@
 };
 
 &wifi0 {
-	nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000 1>;
-	nvmem-cell-names = "eeprom", "mac-address";
-	ieee80211-freq-limit;
 	/delete-property/ ieee80211-freq-limit;
 };
 
 &wifi1 {
 	nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 3>;
 	nvmem-cell-names = "eeprom", "mac-address";
+};
+
+&gmac1 {
+	nvmem-cells = <&macaddr_factory_e000 4>;
+	nvmem-cell-names = "mac-address";
 };
