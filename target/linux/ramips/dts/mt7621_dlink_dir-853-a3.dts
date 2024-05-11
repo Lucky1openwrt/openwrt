@@ -12,7 +12,6 @@
 
 	aliases {
 		label-mac-device = &gmac0;
-
 		led-boot = &led_power_orange;
 		led-failsafe = &led_power_blue;
 		led-running = &led_power_blue;
@@ -44,29 +43,31 @@
 	leds {
 		compatible = "gpio-leds";
 
-		led_power_orange: power_orange {
+		led_power_orange: led-0 {
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
-		led_power_blue: power_blue {
+		led_power_blue: led-1 {
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
-		led_net_orange: net_orange {
-			label = "orange:net";
+		led_net_orange: led-2 {
+			function = LED_FUNCTION_WAN;
+			color = <LED_COLOR_ID_ORANGE>;
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
-		net_blue {
-			label = "blue:net";
+		led-3 {
+			function = LED_FUNCTION_WAN;
+			color = <LED_COLOR_ID_BLUE>;
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 		};
 
-		usb_blue {
+		led-4 {
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
 			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
@@ -74,14 +75,16 @@
 			linux,default-trigger = "usbport";
 		};
 
-		wlan2g {
-			label = "blue:wlan2g";
+		led-5 {
+			function = LED_FUNCTION_WLAN_2GHZ;
+			color = <LED_COLOR_ID_BLUE>;
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0radio";
 		};
 
-		wlan5g {
-			label = "blue:wlan5g";
+		led-6 {
+			function = LED_FUNCTION_WLAN_5GHZ;
+			color = <LED_COLOR_ID_BLUE>;
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1radio";
 		};
@@ -182,6 +185,7 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+
 		/* 5 GHz (phy1) does not take the address from calibration data,
 		   but setting it manually here works */
 		nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_4>;

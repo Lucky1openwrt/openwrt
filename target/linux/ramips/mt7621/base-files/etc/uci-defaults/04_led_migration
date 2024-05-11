@@ -4,6 +4,15 @@
 board=$(board_name)
 
 case "$board" in
+dlink,dir-853-a1|\
+dlink,dir-853-a3|\
+dlink,dir-853-r1|\
+dlink,dir-867-a1|\
+dlink,dir-878-a1|\
+dlink,dir-878-r1|\
+dlink,dir-882-a1|\
+dlink,dir-882-r1|\
+dlink,dir-1935-a1|\
 dlink,dir-1960-a1|\
 dlink,dir-2640-a1|\
 dlink,dir-2660-a1|\
