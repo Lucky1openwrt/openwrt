@@ -769,6 +769,29 @@ define Device/dlink_dap-x1860-a1
 endef
 TARGET_DEVICES += dlink_dap-x1860-a1
 
+define Device/dlink_dir-128m-a1
+  $(Device/nand)
+  IMAGE_SIZE := 40960k
+  DEVICE_VENDOR := D-Link
+  DEVICE_PACKAGES := kmod-mt7615-firmware kmod-usb3 \
+	kmod-usb-ledtrig-usbport -uboot-envtools
+  KERNEL := $$(KERNEL) | uimage-sgehdr
+  IMAGES += recovery.bin
+  IMAGE/recovery.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
+	check-size
+endef
+
+define Device/dlink_dir-128m-r1
+  $(Device/nand)
+  IMAGE_SIZE := 129536k
+  DEVICE_VENDOR := D-Link
+  DEVICE_PACKAGES :=  -uboot-envtools
+  KERNEL := $$(KERNEL)
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
+	check-size 
+endef
+
 define Device/dlink_dir-8xx-a1
   $(Device/dsa-migration)
   IMAGE_SIZE := 16000k
@@ -790,18 +813,6 @@ define Device/dlink_dir-8xx-r1
 	check-size | append-metadata
 endef
 
-define Device/dlink_dir_nand_128m
-  $(Device/nand)
-  IMAGE_SIZE := 40960k
-  DEVICE_VENDOR := D-Link
-  DEVICE_PACKAGES := kmod-mt7615-firmware kmod-usb3 \
-	kmod-usb-ledtrig-usbport -uboot-envtools
-  KERNEL := $$(KERNEL) | uimage-sgehdr
-  IMAGES += recovery.bin
-  IMAGE/recovery.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
-	check-size
-endef
-
 define Device/dlink_dir-1935-a1
   $(Device/dlink_dir-8xx-a1)
   DEVICE_MODEL := DIR-1935
@@ -811,14 +822,14 @@ endef
 TARGET_DEVICES += dlink_dir-1935-a1
 
 define Device/dlink_dir-1960-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-1960
   DEVICE_VARIANT := A1
 endef
 TARGET_DEVICES += dlink_dir-1960-a1
 
 define Device/dlink_dir-2055-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_PACKAGES += -kmod-usb-ledtrig-usbport
   DEVICE_MODEL := DIR-2055
   DEVICE_VARIANT := A1
@@ -826,7 +837,7 @@ endef
 TARGET_DEVICES += dlink_dir-2055-a1
 
 define Device/dlink_dir-2150-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-2150
   DEVICE_VARIANT := A1
   DEVICE_PACKAGES += kmod-mt7603 -kmod-usb3 -kmod-usb-ledtrig-usbport
@@ -835,29 +846,38 @@ define Device/dlink_dir-2150-a1
 endef
 TARGET_DEVICES += dlink_dir-2150-a1
 
+define Device/dlink_dir-2150-r1
+  $(Device/dlink_dir-128m-r1)
+  DEVICE_MODEL := DIR-2150
+  DEVICE_VARIANT := R1
+  DEVICE_PACKAGES += kmod-mt7603 kmod-mt7615-firmware kmod-usb3
+  IMAGE/factory.bin += | sign-dlink-ru e6587b35a6b34e07bedeca23e140322f 
+endef
+TARGET_DEVICES += dlink_dir-2150-r1
+
 define Device/dlink_dir-2640-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-2640
   DEVICE_VARIANT := A1
 endef
 TARGET_DEVICES += dlink_dir-2640-a1
 
 define Device/dlink_dir-2660-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-2660
   DEVICE_VARIANT := A1
 endef
 TARGET_DEVICES += dlink_dir-2660-a1
 
 define Device/dlink_dir-3040-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-3040
   DEVICE_VARIANT := A1
 endef
 TARGET_DEVICES += dlink_dir-3040-a1
 
 define Device/dlink_dir-3060-a1
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-3060
   DEVICE_VARIANT := A1
 endef
@@ -872,7 +892,7 @@ endef
 TARGET_DEVICES += dlink_dir-853-a1
 
 define Device/dlink_dir-853-a3
-  $(Device/dlink_dir_nand_128m)
+  $(Device/dlink_dir-128m-a1)
   DEVICE_MODEL := DIR-853
   DEVICE_VARIANT := A3
   IMAGES += factory.bin

@@ -7,7 +7,7 @@
 #include <dt-bindings/leds/common.h>
 
 / {
-	aliases {
+	aliases: aliases {
 		label-mac-device = &gmac0;
 		led-boot = &led_power_orange;
 		led-failsafe = &led_power_white;
@@ -56,90 +56,6 @@
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_WHITE>;
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
-		};
-	};
-};
-
-&nand {
-	status = "okay";
-
-	partitions {
-		compatible = "fixed-partitions";
-		#address-cells = <1>;
-		#size-cells = <1>;
-
-		partition@0 {
-			label = "Bootloader";
-			reg = <0x0 0x80000>;
-			read-only;
-		};
-
-		partition@80000 {
-			label = "config";
-			reg = <0x80000 0x80000>;
-			read-only;
-		};
-
-		partition@100000 {
-			label = "factory";
-			reg = <0x100000 0x40000>;
-			read-only;
-
-			nvmem-layout {
-				compatible = "fixed-layout";
-				#address-cells = <1>;
-				#size-cells = <1>;
-
-				eeprom_factory_0: eeprom@0 {
-					reg = <0x0 0x4da8>;
-				};
-
-				eeprom_factory_8000: eeprom@8000 {
-					reg = <0x8000 0x4da8>;
-				};
-
-				macaddr_factory_e000: macaddr@e000 {
-					compatible = "mac-base";
-					reg = <0xe000 0x6>;
-					#nvmem-cell-cells = <1>;
-				};
-			};
-		};
-
-		partition@140000 {
-			label = "config2";
-			reg = <0x140000 0x40000>;
-			read-only;
-		};
-
-		partition@180000 {
-			label = "firmware";
-			compatible = "openwrt,uimage", "denx,uimage";
-			openwrt,padding = <96>;
-			reg = <0x180000 0x2800000>;
-		};
-
-		partition@2980000 {
-			label = "private";
-			reg = <0x2980000 0x2000000>;
-			read-only;
-		};
-
-		partition@4980000 {
-			label = "firmware2";
-			reg = <0x4980000 0x2800000>;
-		};
-
-		partition@7180000 {
-			label = "mydlink";
-			reg = <0x7180000 0x600000>;
-			read-only;
-		};
-
-		partition@7780000 {
-			label = "reserved";
-			reg = <0x7780000 0x880000>;
-			read-only;
 		};
 	};
 };

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
-#include "mt7621_dlink_dir_nand_128m.dtsi"
+#include "mt7621_dlink_dir-xxxx-xx.dtsi"
+#include "mt7621_dlink_flash-128m-a1.dtsi"
 
 / {
 	compatible = "dlink,dir-3040-a1", "mediatek,mt7621-soc";
