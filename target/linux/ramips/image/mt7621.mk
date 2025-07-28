@@ -911,6 +911,19 @@ define Device/dlink_dir_nand_128m
   IMAGE/recovery.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
 	check-size
 endef
+define Device/dlink_dir-1260-r1
+  $(Device/nand)
+  IMAGE_SIZE := 129536k
+  DEVICE_VENDOR := D-Link
+  DEVICE_MODEL := DIR-1260
+  DEVICE_VARIANT := R1
+  DEVICE_PACKAGES :=  -uboot-envtools kmod-mt7603 kmod-mt7663-firmware-ap kmod-usb3
+  KERNEL := $$(KERNEL)
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
+	check-size | sign-dlink-ru feb007bdabac4b40bff2b216aa23e597
+endef
+TARGET_DEVICES += dlink_dir-1260-r1
 
 define Device/dlink_dir-1935-a1
   $(Device/dlink_dir-8xx-a1)
